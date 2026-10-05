@@ -1,0 +1,43 @@
+model:
+  name_or_path: Qwen/Qwen2.5-VL-7B-Instruct
+  trust_remote_code: true
+  gradient_checkpointing: true
+  torch_dtype: bfloat16
+
+reward:
+  aha_patterns:
+    - "wait, let me think"
+    - "wait, let me reconsider"
+    - "let me think"
+  format_beta: 0.3
+  entropy_clip_eta: null
+  entropy_window: null
+
+srjo:
+  clean_trigger_mix_alpha: 0.5
+  asr_threshold: 0.80
+  entropy_gate_gamma: 0.20
+  rho_min: 0.50
+  rl_coverage_increment: 0.05
+  rl_coverage_steps: 50
+  max_rl_coverage: 0.50
+  rl_weight: 1.0
+  gate_check_steps: 200
+  rho_schedule: appendix
+
+train:
+  seed: 1
+  epochs: 1
+  learning_rate: 2.0e-5
+  warmup_ratio: 0.05
+  grad_clip_norm: 1.0
+  bf16: true
+  num_rollouts: 4
+  max_new_tokens: 256
+  temperature: 1.0
+  top_p: 0.95
+  kl_coef: 0.02
+  grpo_clip_epsilon: null
+  save_steps: 200
+  log_steps: 10
+  output_dir: outputs/reshift-qwen25vl
